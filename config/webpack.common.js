@@ -145,7 +145,7 @@ module.exports = function (options) {
           test: /initial\.scss$/,
           loader: ExtractTextPlugin.extract({
             fallbackLoader: 'style-loader',
-            loader: 'css-loader!sass-loader?sourceMap'
+            loader: 'css-loader!sass-loader'
           })
         },
 

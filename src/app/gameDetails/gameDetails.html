@@ -1,31 +1,28 @@
-<div class="row"> 
-    <h1>gameDetails</h1>
-    <div class="col-md-10">
+<div class="row detailsRow" > 
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">
-                <label  class='form-control' name="source" placeholder="source">{{gameData.route.source}}</label>
+                <label  class='form-control yellow' name="source" placeholder="source">{{gameData.route.source}}</label>
             </div>
             <div class="col-md-6">
-                <label type="text" class='form-control' name="destanation" >{{gameData.route.destination}}</label>
+                <label type="text" class='form-control dark-green' name="destanation" >{{gameData.route.destination}}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label type="text" class='form-control' name="playerName">{{gameData.player}}</label>
+                <label type="text" class='form-control purple' name="playerName">{{gameData.player}}</label>
             </div>
             <div class="col-md-6">
-                <label type="text" class='form-control' name="timePast">timePast</label>
+                <label type="text" class='form-control light-orange' name="timePast">{{time.format('HH:mm:ss')}}</label>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <label type="text" class='form-control' name="distance">{{distance1}}</label>
+                <label type="text" class='form-control pink' name="distance">{{distance1}}</label>
             </div>
             <div class="col-md-6">
-                <label type="text" class='form-control' name="currentPlace">{{currentAddress}}</label>
+                <label type="text" class='form-control dark-orange' name="currentPlace">{{currentAddress}}</label>
             </div>
         </div>
     </div>
-   
-  
 </div>

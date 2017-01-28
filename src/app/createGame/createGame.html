@@ -1,77 +1,143 @@
 <div>
-  <a [routerLink]=" ['../raceHome'] " style="color:white;">Home</a>
-  <a [routerLink]=" ['../createGame'] " style="color:white;">Create</a>
-  <a [routerLink]=" ['../gameBoard'] " style="color:white;">Game</a>
-  <a [routerLink]=" ['../history'] " style="color:white;">History</a>
-
-   <a [routerLink]=" ['../raceHome'] ">
+  <!--<a [routerLink]=" ['../raceHome'] ">
         <input type="button" class="btn btn-primary" value = 'Home'/>
-    </a>
-    <h1 >create  game</h1>
-    <div class="row">
-      <div class="col-md-9">
-        <input type="text" class="form-control" placeholder="Enter your name" [(ngModel)]=tempData.player/>
-        <accordion [closeOthers]="oneAtATime">
-                <accordion-group class="buttonMenu" heading="SELECT YOUR CAR">   
-                  <label>select color</label>       
-                  <div class="row">
-                    <input class="btnColor" type="button" (click)="setSelectedColor('pink')" style="background-color: pink;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('DarkViolet')" style="background-color: DarkViolet;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('Coral')" style="background-color: Coral;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('Gold')" style="background-color: Gold;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('red')" style="background-color: red;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('orange')" style="background-color: orange;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('green')" style="background-color: green;"/>
-                    <input class="btnColor" type="button" (click)="setSelectedColor('blue')" style="background-color: blue;"/>
-                  </div>             
-                </accordion-group>  
-                <accordion-group class="buttonMenu" heading="CREATE ROUTE">
-                  <p>CREATE ROUTE</p>
-                  <input type="text" class='form-control' [(ngModel)]="tempData.route.source"  placeholder="enter source"/>
-                  <input type="text" class='form-control' [(ngModel)]="tempData.route.destination"  placeholder="enter destination"/>
-                </accordion-group>
-                <accordion-group class="buttonMenu" heading="SELECT LEVEL">
-                  <form>
-                    <fieldset> 
-                      <legend>Select Level</legend> 
-                          <input type="radio" name="gender" (change)="setSelectedLevel('low')"> low 
-                          <input type="radio" name="gender" (change)="setSelectedLevel('intermediate')"> intermediate 
-                          <input type="radio" name="gender" (change)="setSelectedLevel('high')"> high 
-                    </fieldset>
-                  </form>
-                  <form>
-                    <fieldset> 
-                      <legend>Select Num Players</legend> 
-                          <input type="radio" name="gender" (change)="setSelectednNumPlayers(1)"> play alone
-                          <input type="radio" name="gender" (change)="setSelectednNumPlayers(2)"> 2 players 
-                          <input type="radio" name="gender" (change)="setSelectednNumPlayers(3)"> 3 players 
-                    </fieldset>
-                  </form>
-                </accordion-group>
-        </accordion>
-        <a [routerLink]=" ['../gameBoard'] ">
-            <input type="button" class="btn btn-primary buttonMenu" (click)="saveGameData()" [tooltip]="'Click for START'" value = 'START'/>
-        </a>
-      </div>
+    </a>-->
 
-      <div class="panel panel-primary panelPadding col-md-3">
-        <div class="panel-heading">Your Game</div>
-        <div class="panel-body">
-          <div>  
-              <label>color:</label>
-              <label id="labelColor">{{tempData.carColor}} </label>
+  <div class="row CreateGameRow">
+
+    <div class="col-md-8">
+      <input type="text" class="input-yellow alert form-control" placeholder="Enter your name" [(ngModel)]=tempData.player/>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel-default card">
+          <div class="panel-heading card-header card-header-purple" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              SELECT YOUR CAR
+            </a>
+            </h4>
           </div>
-          <div>  
-              <label>from: {{tempData.route.source}}</label>
-              <label> to: {{tempData.route.destination}}</label>
+          <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+            <div class="card-block">
+              <div class="row">
+                <input class="btnColor" type="button" (click)="setSelectedColor('brown')" style="background-color: brown;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('gray')" style="background-color: gray;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('red')" style="background-color: red;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('black')" style="background-color: black;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('yellow')" style="background-color:yellow ;" />
+              </div>
+            </div>
           </div>
-          <div>  
-              <label>Level: {{tempData.level}} </label><div></div>
-              <label>Num Players: {{tempData.numPlayers}}</label>
+
+        </div>
+        <div class="panel-default card">
+          <div class="panel-heading card-header card-header-pink" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                aria-controls="collapseTwo">
+              CREATE ROUTE
+            </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="card-block">
+              <input type="text" class='form-control' [(ngModel)]="tempData.route.source" placeholder="enter source" />
+              <input type="text" class='form-control' [(ngModel)]="tempData.route.destination" placeholder="enter destination" />
+            </div>
+          </div>
+        </div>
+        <div class="panel-default card">
+          <div class="panel-heading card-header card-header-dark-green" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                aria-controls="collapseThree">
+              SELECT LEVEL
+            </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="card-block">
+              <form>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" (click)="setSelectedLevel(1)" checked> low
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" (click)="setSelectedLevel(2)"> intermediate
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off" (click)="setSelectedLevel(3)"> high
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" (change)="setSelectedLevel(4)"> high+
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off" (change)="setSelectedLevel(5)"> master
+                  </label>
+                </div>
+                <!--<fieldset>
+                  <legend>Select Level</legend>
+                  <input type="radio" name="gender" (change)="setSelectedLevel(1)"> low
+                  <input type="radio" name="gender" (change)="setSelectedLevel(2)"> intermediate
+                  <input type="radio" name="gender" (change)="setSelectedLevel(3)"> high
+                  <input type="radio" name="gender" (change)="setSelectedLevel(4)"> high+
+                  <input type="radio" name="gender" (change)="setSelectedLevel(5)"> master
+                </fieldset>-->
+              </form>
+              <form>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" (click)="setSelectednNumPlayers(1)" checked> play alone
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" (click)="setSelectednNumPlayers(2)"> 2 players
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off" (click)="setSelectednNumPlayers(3)"> 3 players
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off" (change)="setSelectednNumPlayers(4)"> 4 players
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off" (change)="setSelectednNumPlayers(5)"> 5 players
+                  </label>
+                </div>
+                <!--<fieldset>
+                  <legend>Select Num Players</legend>
+                  <input type="radio" name="gender" (change)="setSelectednNumPlayers(1)"> play alone
+                  <input type="radio" name="gender" (change)="setSelectednNumPlayers(2)"> 2 players
+                  <input type="radio" name="gender" (change)="setSelectednNumPlayers(3)"> 3 players
+                  <input type="radio" name="gender" (change)="setSelectednNumPlayers(4)"> 4 players
+                  <input type="radio" name="gender" (change)="setSelectednNumPlayers(5)"> 5 players
+                </fieldset>-->
+              </form>
+            </div>
+          </div>
+        </div>
+        <input type="button" class="btn-race orange" (click)="saveGameData()" [tooltip]="'Click for START'" value='START' />
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3">
+      <h3 class="panel-title">Your Game</h3>
+      <div class="panel-body" ng-transclude="">
+        <div class="ng-scope">
+          <div class="alert card-header-purple">
+            <strong>color: </strong><label id="labelColor">{{tempData.carColor}}</label>
+          </div>
+          <div class="alert card-header-pink">
+            <div><strong>from: </strong>{{tempData.route.source}}</div>
+            <div><strong>to: </strong>{{tempData.route.destination}}</div>
+          </div>
+          <div class="alert card-header-dark-green">
+            <strong>Level: </strong>{{tempData.level}}
+          </div>
+          <div class="alert input-yellow">
+            <strong>Num Players: </strong>{{tempData.numPlayers}}
           </div>
         </div>
       </div>
     </div>
-  
+  </div>
 </div>
-
+<img class="car3" src="../../images/car3.png" />

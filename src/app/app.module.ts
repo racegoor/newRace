@@ -4,13 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import {GameModule} from './game/game.module';
-import {GameDetailsModule} from './gameDetails/gameDetails.module';
-import {GameMapModule} from './gameMap/gameMap.module';
-import {GameBoardModule} from './gameBoard/gameBoard.module';
-import {CreateGameModule} from './createGame/createGame.module';
-import {RaceHomeModule} from './raceHome/raceHome.module';
-import { HistoryModule} from './history/history.module';
+import { GameModule } from './game/game.module';
+import { GameDetailsModule } from './gameDetails/gameDetails.module';
+import { PlayersStatusModule} from './playersStatus/playersStatus.module';
+import { GameMapModule } from './gameMap/gameMap.module';
+import { GameBoardModule } from './gameBoard/gameBoard.module';
+import { CreateGameModule } from './createGame/createGame.module';
+import { RaceHomeModule } from './raceHome/raceHome.module';
+import { HistoryModule } from './history/history.module';
+import { AboutRaceModule } from './aboutRace/aboutRace.module';
+import { MomentModule } from 'angular2-moment';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -52,6 +55,7 @@ type StoreType = {
     HttpModule,
     RouterModule,
     FormsModule,
+    MomentModule, //moment.js
     ReactiveFormsModule,
     NgaModule.forRoot(),
     HomeModule,
@@ -60,10 +64,12 @@ type StoreType = {
     routing,
     GameModule,
     GameDetailsModule,
+    PlayersStatusModule,
     GameMapModule,
     GameBoardModule,
     CreateGameModule,
     HistoryModule,
+    AboutRaceModule,
     RaceHomeModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyA3MSv-mmUENEGYU4-0d37eWaASZji01zQ' }),
   ],

@@ -1,2 +1,44 @@
-.sebm-google-map-container{height: 400px; width: 400px;}
-.text{font-size: 16px; color:'#123456' }
+.sebm-google-map-container {
+     height: 400px;
+     width: 400px;
+}
+
+.text {
+    font-size: 16px;
+    color:'#123456'
+}
+
+.form-control{
+    border-radius: 0px;
+    height: 6vh;
+}
+
+@media (max-width: 600px) {
+    .form-control {
+        height: 35px;
+    }
+}
+
+.yellow {
+    background-color: #ffc200;
+}
+
+.pink {
+    background-color: #d33c79;
+}
+
+.purple {
+    background-color: #b70056;
+}
+
+.light-orange {
+    background-color: #ef5425;
+}
+
+.dark-orange {
+    background-color: #b54327;
+}
+
+.dark-green {
+    background-color: #3d9243;
+}

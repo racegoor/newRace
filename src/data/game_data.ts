@@ -1,37 +1,64 @@
+export class marker {
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable?: boolean;
+    iconUrl?: string;
+}
 
-export class Route{
+export class Route {
     source: string;
+    sourcePoint: Point;
     destination: string;
+    destPoint: Point;
+
+    constructor() {
+        this.source = 'HaDaf HaYomi 6 Tel Aviv';
+        this.destination = 'HaZanchanim 22 Tel Aviv';
+        this.destPoint = { lat: 32.1167004, lng: 34.84040849999997 };
+        this.sourcePoint = { lat: 32.115633, lng: 34.84027600000002 };
+    }
+}
+
+export class markerLocation {
+    marker: string;
+    currentLocation: Point;
 }
 
 //props ???
 export class GameData {
     carColor: string;
     route: Route;
-    level: string;
+    level: number;
     numPlayers: number;
     player: string;
-    constructor(carColor: string,route: Route,level: string,numPlayers: number,player: string){
-        this.carColor = carColor;   
-        this.route = route;
-        this.level = level;
-        this.numPlayers = numPlayers;
-        this.player = player;
-    }
-    constructor(){
-        this.carColor = '';   
+    //delete
+    sourcePoint?: Point;
+    destinationPoint?: Point;
+
+    constructor() {
+        this.carColor = 'red';
         this.route = new Route();
-        this.level = '';
-        this.numPlayers = 1;
+        this.level = 2;
+        this.numPlayers = 3;
         this.player = '';
+        this.destinationPoint = { lat: 32.1167004, lng: 34.84040849999997 }
+        this.sourcePoint = { lat: 32.115633, lng: 34.84027600000002 };
     }
-    
-    setData(gameData: GameData){
-        this.carColor = gameData.carColor? gameData.carColor : 'red' ;   
-        this.route = gameData.route? gameData.route: {source:'HaDaf HaYomi 6 Tel Aviv', destination: 'HaZanchanim 22 Tel Aviv'};
-        this.level = gameData.level? gameData.level : 'low' ;
-        this.numPlayers = gameData.numPlayers? gameData.numPlayers : 1 ;
-        this.player = gameData.player? gameData.player : 'unknown';
+
+    setData(gameData: GameData) {
+        this.carColor = gameData.carColor ? gameData.carColor : 'red';
+        this.route = gameData.route ? gameData.route : {
+            source: 'HaDaf HaYomi 6 Tel Aviv',
+            destination: 'HaZanchanim 22 Tel Aviv',
+            destPoint: { lat: 32.1167004, lng: 34.84040849999997 },
+            sourcePoint: { lat: 32.115633, lng: 34.84027600000002 }
+        };
+        this.level = gameData.level ? gameData.level : 1;
+        this.numPlayers = gameData.numPlayers ? gameData.numPlayers : 3;
+        this.player = gameData.player ? gameData.player : 'unknown';
+        this.destinationPoint = gameData.destinationPoint ? gameData.destinationPoint : null;
+        this.sourcePoint = gameData.sourcePoint ? gameData.sourcePoint : null;
     }
 }
 
@@ -41,6 +68,27 @@ export class Point {
 }
 
 // let ???
-export let gameData: GameData = new GameData('red',{source:'HaDaf HaYomi 6 Tel Aviv', destination: 'HaZanchanim 22 Tel Aviv'},'',0, 'Zipi') {
+export class Locations {
+    private points: Point[] = [];
+    addPoint(lat: number, lng: number) {
+        this.points.push({ lat: lat, lng: lng });
+    }
+}
 
+export class SavedGame {
+    id: string;
+    numPlayers: number;
+    date: string;
+    dateStart: string;
+    dateEnd: string;
+    time: string;
+    playerName: string;
+    routePoints: Point[];
+    route: Route;
+}
+
+
+export let gameData: GameData =  new GameData();
+export let locations: Locations = new Locations();
+export let markersLocation: markerLocation[];
 

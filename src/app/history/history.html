@@ -1,52 +1,37 @@
-<div>
-  <a [routerLink]=" ['../raceHome'] ">Home</a>
-  <a [routerLink]=" ['../createGame'] ">Create</a>
-  <a [routerLink]=" ['../gameBoard'] ">Game</a>
-  <a [routerLink]=" ['../history'] ">History</a>
-
-  
+<div class="history">
   <a [routerLink]=" ['../raceHome'] ">
-        <input type="button" class="btn btn-primary" value = 'Home'/>
-    </a> 
-<div class="container">        
-  <table class="table">
-    <thead>
-      <tr>
-        <th>DATE</th>
-        <th>SOURCE</th>
-        <th>DESTINATION</th>
-        <th>NUM PLAYERS</th>
-        <th>WINNER</th>
-        <th>TIME</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>01/01/12</td>
-        <td>HaDaf Hyomi 6 Tel Aviv</td>
-        <td>HaZanchanim 22 Tel Aviv</td>
-        <td>3</td>
-        <td>Zipi</td>
-        <td>00:12:12</td>
-      </tr>
-      <tr>
-        <td>01/01/12</td>
-        <td>HaDaf Hyomi 6 Tel Aviv</td>
-        <td>HaZanchanim 22 Tel Aviv</td>
-        <td>2</td>
-        <td>Tzipi</td>
-        <td>00:12:12</td>
-      </tr>
-      <tr>
-        <td>01/01/12</td>
-        <td>HaDaf Hyomi 6 Tel Aviv</td>
-        <td>HaZanchanim 22 Tel Aviv</td>
-         <td>2</td>
-        <td>Zipi</td>
-        <td>00:12:12</td>
-      </tr>
-    </tbody>
-  </table>
-</div>   
+    <input type="button" class="btn btn-primary" value='Back' />
+  </a>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>DATE</th>
+          <th>SOURCE</th>
+          <th>DESTINATION</th>
+          <th>NUM PLAYERS</th>
+          <th>WINNER</th>
+          <th>TIME</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of history; let i = index" (click)="viewMap(game.routePoints[0] , game.routePoints)" [style.backgroundColor]="colors[i%5]">
+            <td >{{game.date}}</td>
+            <td>{{game.route.source}}</td>
+            <td>{{game.route.destination}}</td>
+            <td>{{game.numPlayers}}</td>
+            <td>{{game.playerName}}</td>
+            <td>{{game.time}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="divMap">
+      <sebm-google-map id="map" [latitude]="pointMap.lat" [longitude]="pointMap.lng" [zoom]="16">
+        <sebm-google-map-polyline [strokeColor]="red">
+          <sebm-google-map-polyline-point *ngFor="let loc of locations" [latitude]="loc.lat" [longitude]="loc.lng">
+          </sebm-google-map-polyline-point>
+        </sebm-google-map-polyline>
+      </sebm-google-map>
+    </div>
+  </div>
 </div>
-

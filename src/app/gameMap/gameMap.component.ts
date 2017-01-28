@@ -1,18 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { AgmCoreModule, LatLngLiteral, LatLngBounds, SebmGoogleMap } from 'angular2-google-maps/core';
-import { GameData, Point } from '../../data/game_data';
+import { GameData, Point, Locations, marker, markerLocation, gameData } from '../../data/game_data';
 import { MapsAPILoader, NoOpMapsAPILoader, MouseEvent } from 'angular2-google-maps/core';
 import * as mapTypes from 'angular2-google-maps/services/google-maps-types';
 
-interface marker {
-    lat: number;
-    lng: number;
-    label?: string;
-    draggable: boolean;
-    iconUrl?: string;
-}
-
-interface Route {
+interface RouteDriving {
     points: Point[];
 }
 
@@ -24,191 +16,208 @@ interface Route {
 })
 
 export class GameMapComponent implements OnInit {
-    @Input() gameData: GameData;
-    icon: string = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-    point: Point;
+    @Input() gameData: GameData = gameData;
+    @Input() currentPoint: Point;
+    @Input() locations: Locations;
+    @Output() onChangeMarkersLocation: EventEmitter<Object> = new EventEmitter<Object>();
+    playersLocation: markerLocation
+    point: Point = gameData.route.sourcePoint;
     source: Point;
     destination: Point;
-    index: number;
-    loc: GLfloat = 0;
-    driving: Route[] = [];
-    markers: marker[] = [{
-        lat: 32.115620,
-        lng: 33.8402730000,
-        label: "ME",
-        draggable: false
-    },
-    {
-        lat: 0,
-        lng: 0,
-        label: "TRY",
-        draggable: false
-    },
-    {
-        lat: 0,
-        lng: 0,
-        label: "TRY",
-        draggable: false
-    },
-    {
-        lat: 0,
-        lng: 0,
-        label: "TRY",
-        draggable: false
-    }];
+    driving: RouteDriving[] = [];
+    markers: marker[] = [];
+    success: boolean = false;
+    icons: string[] = ['', 'green', 'blue', 'purple', 'orange']
 
-    constructor() {
-        var a = 5;
-        this.point = { lat: 32.115620, lng: 33.8402730000 }; //This line is temp
-        /*this.markers[0] = {
-                lat: this.point.lat,
-                lng: this.point.lng,
-                label:"ME",
-                iconUrl:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                draggable: false
-                }*/
+    constructor() {  
+        this.icons[0] = this.gameData.carColor;
     }
 
-    ngOnInit() {
+     ngOnInit() {
+        this.markers.push({
+            lat: this.currentPoint.lat,
+            lng: this.currentPoint.lng,
+            label: "ME",
+            draggable: false,
+            iconUrl: 'http://labs.google.com/ridefinder/images/mm_20_' + this.gameData.carColor + '.png'
+        })
+
+        for (let i = 0; i < this.gameData.numPlayers; i++) {
+            this.onChangeMarkersLocation.emit(
+                {
+                    currentLocation: this.gameData.route.sourcePoint,
+                    marker: 'http://labs.google.com/ridefinder/images/mm_20_' + this.icons[i] + '.png',
+                    index: i
+                });
+        }
     }
 
     renderMarkers() {
+        console.log('render markers', this.markers, this.gameData.numPlayers)
         //TODO: add markers from the code
-        for (this.index = 0; this.index < this.gameData.numPlayers; this.index++) {
-            this.markers[this.index].lat = this.point.lat;
-            this.markers[this.index].lng = this.point.lng + this.loc;
-            this.markers[this.index].label = "player" + this.index;
-            //this.markers[this.index].iconUrl = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-            this.loc += 0.0003;
+        this.markers[0].lat = this.gameData.route.sourcePoint.lat;
+        this.markers[0].lng = this.gameData.route.sourcePoint.lng;
+        let loc = 0
+        for (let index = 1; index < this.gameData.numPlayers; index++) {
+            if (this.markers.length <= this.gameData.numPlayers) {
+                this.markers.push({
+                    lat: this.gameData.route.sourcePoint.lat,
+                    lng: this.gameData.route.sourcePoint.lng + loc,
+                    label: "player" + index,
+                    draggable: false,
+                    iconUrl: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                })
+                loc += 0.0003;
+            }
         }
+        console.log('numPlayers', this.markers, this.gameData.numPlayers)
     }
 
-    getMap() {
-        let geocoder3 = new google.maps.Geocoder();
-        geocoder3.geocode({ 'address': this.gameData.route.source }, (results, status) => {
-            if (status == google.maps.GeocoderStatus.OK) {
-                let latitude = results[0].geometry.location.lat();
-                let longitude = results[0].geometry.location.lng();
-                this.point = this.source = { lat: latitude, lng: longitude };
-                this.renderMarkers();
+    
+    moveSinglePoint(index: number, delay: number) {
+        let i = 0;
+        let moveOtherPoints = setInterval(() => {
+            if (this.driving[index - 1] && this.driving[index - 1].points[i]) {
+                this.markers[index].lat = this.driving[index - 1].points[i].lat;
+                this.markers[index].lng = this.driving[index - 1].points[i].lng;
             }
-            else {
-                console.log("source: Address not found")
+            if (this.success || this.markers[index].lat.toFixed(3) == this.gameData.route.destPoint.lat.toFixed(3)
+                && this.markers[index].lng.toFixed(3) == this.gameData.route.destPoint.lng.toFixed(3)) {
+                    clearInterval(moveOtherPoints);
             }
-        });
-        geocoder3.geocode({ 'address': this.gameData.route.destination }, (results, status) => {
-            if (status == google.maps.GeocoderStatus.OK) {
-                let latitude = results[0].geometry.location.lat();
-                let longitude = results[0].geometry.location.lng();
-                this.destination = { lat: latitude, lng: longitude };
-                this.renderMarkers();
-            }
-            else {
-                console.log("source: Address not found")
-            }
-        });
+            i++;
+            this.onChangeMarkersLocation.emit(
+                {
+                    currentLocation: { lat: this.markers[index].lat, lng: this.markers[index].lng },
+                    marker: 'http://labs.google.com/ridefinder/images/mm_20_' + this.icons[index] + '.png',
+                    index: index
+                });
+        }, delay);
     }
 
-    createRouteForOther(index: number) {
-        let types = ['WALKING', 'DRIVING', 'WALKING']
+    movePlayerPoint() {
+        this.markers[0].lat = this.gameData.route.sourcePoint.lat;
+        this.markers[0].lng = this.gameData.route.sourcePoint.lng;
+        this.markers[0].label = "ME";
+        let movePlayer = setInterval(() => {
+            //console.log('this.locations', this.locations);
+            this.point.lat = this.markers[0].lat = this.currentPoint.lat;
+            this.point.lng = this.markers[0].lng = this.currentPoint.lng;
+            this.onChangeMarkersLocation.emit(
+                {
+                    currentLocation: this.currentPoint,
+                    marker: 'http://labs.google.com/ridefinder/images/mm_20_' + this.icons[0] + '.png',
+                    index: 0
+                });
+            if (this.markers[0].lat.toFixed(3) == this.gameData.route.destPoint.lat.toFixed(3)
+                && this.markers[0].lng.toFixed(3) == this.gameData.route.destPoint.lng.toFixed(3)) {
+                this.success = true;
+                clearInterval(movePlayer);
+                this.onChangeMarkersLocation.emit(
+                    {
+                        currentLocation: this.gameData.route.destPoint,
+                        marker: 'http://labs.google.com/ridefinder/images/mm_20_' + this.icons[0] + '.png',
+                        index: 0
+                    });
+            }
+        }, 1000)
+
+    }
+    getRightPoint(movePoint: Point, num: number) {
+    //TODO: async function, need callback
+    let geocoder3 = new google.maps.Geocoder();
+    let newMovePoint:Point = {lat:num/100 + movePoint.lat , lng:num/120+movePoint.lng}
+    geocoder3.geocode({ 'location': newMovePoint }, (results, status) => {
+        if (status == google.maps.GeocoderStatus.OK) {
+            console.log("*********vvv******", results[0], num);
+            return results[0].formatted_address;
+        }
+        else {
+                console.log("*****xxx*******")
+            }
+        });
+            return this.gameData.route.source;
+    }
+
+    createRouteForOther(index, callback) {
+
+        //create diffrebt routes to type DRIVING
+        let _callback = callback.bind(this);
         let directionsDisplay;
+        let wayPoint: string;
         let directionsService = new google.maps.DirectionsService();
-        let start = new google.maps.LatLng(this.source.lat, this.source.lng);
-        let end = new google.maps.LatLng(this.destination.lat, this.destination.lng);
+        let start = new google.maps.LatLng(this.gameData.route.sourcePoint.lat, this.gameData.route.sourcePoint.lng);
+        let end = new google.maps.LatLng(this.gameData.route.destPoint.lat, this.gameData.route.destPoint.lng);
+        wayPoint = this.getRightPoint(this.gameData.route.sourcePoint, index);
         let request = {
             origin: start,
             destination: end,
-            travelMode: google.maps.TravelMode[types[index]]
+            provideRouteAlternatives: true,
+            travelMode: google.maps.TravelMode['DRIVING'],
+            waypoints: [
+                {
+                    location: wayPoint,//new google.maps.LatLng(wayPoint.lat,wayPoint.lng),
+                    stopover: false
+                }],
         };
+        let me = this;
+        //decide what to do there is no route - status != ok
         directionsService.route(request, (response, status) => {
             if (status == google.maps.DirectionsStatus.OK) {
                 let pointsArray = response.routes[0].overview_path;
-                let tempDriving = {points: []};
+                let tempDriving = { points: [] };
                 for (let i = 0; i < pointsArray.length; i++) {
                     tempDriving.points.push({ lat: pointsArray[i].lat(), lng: pointsArray[i].lng() })
                 }
-                this.driving.push(tempDriving);
+                me.driving.push(tempDriving);
+                console.log('set driving', this.driving);
+                _callback();
             }
         });
+        console.log("create route sucess", index, this.driving);
+    }
+    waitForSetRoutes() {
+        console.log('this.waitForSetRoutes  ')
+        let flag = 1;
+        for (let i = 1; i < this.gameData.numPlayers; i++) {
+            flag += this.driving[i - 1] ? 1 : 0;
+        }
+        if (flag == this.gameData.numPlayers) {
+            console.log('this.waitForSetRoutes  finish')
+            this.moveAllPoints();
+        }
+
     }
     addPlayersToMap() {
-        for (this.index = 0; this.index <= this.gameData.numPlayers; this.index++) {
-            this.markers.push(
-                {
-                    lat: this.point.lat + this.index / 1000,
-                    lng: this.point.lng,
-                    draggable: false
-                }
-            )
-            this.createRouteForOther(this.index);
-        }
-        let i = 0;
-        console.log('this.markers', this.markers)
-        let moveOtherPoints = setInterval(() => {
-            for (let j = 0; j <= this.gameData.numPlayers; j++) {
-                if (this.driving[j]) {
-                    this.markers[j] = { lat: this.driving[j].points[i].lat, lng: this.driving[j].points[i].lng, draggable: false };
-               console.log('this.markers[j]', j, this.markers[j])
-             }
-                if (this.markers[0].lat.toFixed(3) == this.destination.lat.toFixed(3) && this.markers[0].lng.toFixed(3) == this.destination.lng.toFixed(3)) {
-                    clearInterval(moveOtherPoints);
-                }
-                 i++;
+        for (let index = 1; index < this.gameData.numPlayers; index++) {
+            console.log("markers.length ", this.markers.length, "this.gameData.numPlayers", this.gameData.numPlayers);
+            if (this.markers.length < this.gameData.numPlayers) {
+                this.markers.push({
+                    lat: this.gameData.route.sourcePoint.lat,
+                    lng: this.gameData.route.sourcePoint.lng,
+                    label: "player" + index,
+                    draggable: false,
+                    iconUrl: 'http://labs.google.com/ridefinder/images/mm_20_' + this.icons[index] + '.png'
+                })
+                this.createRouteForOther(index, this.waitForSetRoutes);
+                console.log('new marker', index, this.markers[index])
             }
-        }, 5000)
+        }
+    }
+
+    moveAllPoints() {
+        let i = 0;
+        this.markers[0].lat = this.currentPoint.lat;
+        this.markers[0].lng = this.currentPoint.lng;
+        for (let i = 1; i < this.gameData.numPlayers; i++) {
+            if (this.driving[i - 1] && this.driving[i - 1].points.length != 0) {
+                this.moveSinglePoint(i, i * 6000/this.gameData.level);
+            }
+        }
+        this.movePlayerPoint();
     }
 }
 
-// <reference path="../../../typings/googlemaps/google.maps.d.ts" />
-/*  instance:SebmGoogleMap =new SebmGoogleMap(document.getElementById("www"));
-          console.log("type map: "+instance.constructor.name);
-          var marker = new google.maps.Marker({
-              position: latlng, 
-              map: map, 
-              title: "Your location."
-          }); 
-      
-      }*/
-  //point array from other players: 
-  /*pointsArray = result.routes[0].overview_path;
-        var i = 0;
-        var j = 0;
-        for (j = 0; j < pointsArray.length; j++)
-        {
-            arrayToBeReturned [i] = pointsArray[j].lat ();
-            i++;
-            arrayToBeReturned [i] = pointsArray[j].lng ();
-            i++;
-            var point1 = new google.maps.Marker ({
-                                            position:pointsArray [j],
-                                            draggable:false,
-                                            map:map,
-                                            flat:true
-                                            });
-        } */
-        //types for calculate route:
-        /*BUS 
-          RAIL 
-          SUBWAY 
-          TRAIN 
-          TRAM 
-          WALKING
-          DRIVING*/
-//street view:
- /* var fenway = {lat: 42.345573, lng: -71.098326};
-     var map = new google.maps.Map(document.getElementById('map'), {
-       center: fenway,
-       zoom: 14
-     });
-     var panorama = new google.maps.StreetViewPanorama(
-         document.getElementById('pano'), {
-           position: fenway,
-           pov: {
-             heading: 34,
-             pitch: 10
-           }
-         });
-     map.setStreetView(panorama);*/
 
 
 

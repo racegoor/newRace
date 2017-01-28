@@ -1,13 +1,27 @@
-<div>
-    <h1>Race</h1>
-        <a [routerLink]=" ['../createGame'] ">
-            <input type="button" class="no-transform btn btn-primary buttonMenu" value = 'Create Game'/>
+<div class="row">
+    <div class="col-md-3 col-sm-8 logo-conatiner">
+        <img class="race-logo" src="../../images/race-logo-new.png"/>
+    </div>
+    <div class="col-md-6 col-sm-0">
+    </div>
+    <div class="col-md-3 col-sm-10">
+        <a [routerLink]=" ['../aboutRace'] ">
+            <input type="button" class="no-transform  btn-race orange" value='about' />
         </a>
-        <a [routerLink]=" ['../gameBoard'] ">
-            <input type="button" class="no-transform btn btn-primary buttonMenu" value = 'Game'/>
-        </a>
+    </div>
+    <div class="col-md-3 col-sm-10">
         <a [routerLink]=" ['../history'] ">
-            <input type="button" class="no-transform btn btn-primary buttonMenu" value = 'History'/>
-        </a>    
+            <input type="button" class="no-transform btn-race orange" value='History' />
+        </a>
+    </div>
 </div>
-
+<div class="row">
+    <img class="bgImage col-md-12 col-sm-12" src="../../images/race-home.png" />
+</div>
+<div class="row col-md-12 btnContainer">
+    <div class="col-md-3 col-sm-10">
+        <a [routerLink]=" ['../createGame'] ">
+            <input type="button" class="no-transform btn-race orange btn-start-game" value='play now!!!' />
+        </a>
+    </div>
+</div>

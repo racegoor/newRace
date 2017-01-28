@@ -8,10 +8,12 @@ import { Home } from './home/home.component';
 //import { AboutComponent } from './about';
 import { GameComponent } from './game/game.component';
 import {GameDetailsComponent} from './gameDetails/gameDetails.component';
+import {PlayersStatusComponent} from './playersStatus/playersStatus.component';
 import { GameBoardComponent } from './gameBoard/gameBoard.component';
 import { CreateGameComponent } from './createGame/createGame.component';
 import { RaceHomeComponent } from './raceHome/raceHome.component';
 import { HistoryComponent } from './history/history.component';
+import { AboutRaceComponent } from './aboutRace/aboutRace.component';
 
 export const routes: Routes = [
     { path: '',      component: RaceHomeComponent },
@@ -21,6 +23,7 @@ export const routes: Routes = [
   {path: 'raceHome', component: RaceHomeComponent},
   { path: 'history', component: HistoryComponent},
   {path: 'gameBoard', component: GameBoardComponent},
+  { path: 'aboutRace' , component: AboutRaceComponent},
   //   { path: 'appointments', component: Appointments,children: [
   //     { path: 'agent-list', component: AgentListComponent }
   //   ] },

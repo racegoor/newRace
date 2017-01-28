@@ -1,7 +1,7 @@
-/// <reference path="../../../typings/googlemaps/google.maps.d.ts" />
-import {Component, OnInit, ViewEncapsulation, Input} from '@angular/core';
-import { AgmCoreModule , LatLngLiteral } from 'angular2-google-maps/core';
-import {GameData} from '../../data/game_data';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { AgmCoreModule, LatLngLiteral } from 'angular2-google-maps/core';
+import { GameData } from '../../data/game_data';
+import moment = require("moment");
 
 @Component({
     selector: 'gameDetails',
@@ -15,27 +15,33 @@ export class GameDetailsComponent implements OnInit {
     @Input() currentAddress: string;
     @Input() gameData: GameData;
     @Input() test: string;
+    @Input() success:boolean = false;
     data: GameData;
+    stopWatch: any;
+    time: any = moment().startOf('day');
 
     constructor() {
-       console.log('game details', this.gameData);
-       console.log('game details test', this.test);
     }
 
     ngOnInit() {
-        this.data = this.gameData;
-       console.log('onInit game details', this.gameData);
-       console.log('onInit game details test', this.test);
-        
+        //start after get map
+        //stop after win
+        setInterval(() => {
+            this.data = this.gameData;
+        }, 500)
+        this.stopWatch = setInterval(() => {
+            this.time.add(1, 'second');
+            if (this.success)
+                clearInterval(this.stopWatch)
+        }, 1000)
     }
-
 }
 
 
- 
 
 
 
 
- 
+
+
 
