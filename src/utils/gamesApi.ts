@@ -23,6 +23,7 @@ export const GameAPI = {
             numPlayers: game.numPlayers,
             date: moment().format('DD/MM/YYYY'),
             dateEnd: game.dateEnd,
+            //winLevel: game.winLevel,
             dateStart: game.dateStart,
             time: moment.utc(moment((game.dateEnd),"DD/MM/YYYY HH:mm:ss").diff(moment((game.dateStart),"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss"),
             routePoints: game.routePoints,

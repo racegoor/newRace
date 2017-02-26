@@ -4,12 +4,21 @@
     </a>-->
 
   <div class="row CreateGameRow">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <div class="row inputRow">
+        <input type="text" id="nameInput" class="input-yellow alert form-control col-md-10" placeholder="Enter your name" [(ngModel)]=tempData.player/>
+        <div class="image-upload col-md-2">
+          <label for="file-input" (click)="showImage()">
+            <img id="target" alt="select image" />
+        </label>
+          <input id="file-input" (click)="showImage()" type="file" />
+        </div>
 
-    <div class="col-md-8">
-      <input type="text" class="input-yellow alert form-control" placeholder="Enter your name" [(ngModel)]=tempData.player/>
+      </div>
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel-default card">
-          <div class="panel-heading card-header card-header-purple" role="tab" id="headingOne">
+          <div class="panel-heading card-header card-header-red" role="tab" id="headingOne">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               SELECT YOUR CAR
@@ -19,11 +28,12 @@
           <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
             <div class="card-block">
               <div class="row">
-                <input class="btnColor" type="button" (click)="setSelectedColor('brown')" style="background-color: brown;" />
-                <input class="btnColor" type="button" (click)="setSelectedColor('gray')" style="background-color: gray;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('purple')" style="background-color: purple;" />
                 <input class="btnColor" type="button" (click)="setSelectedColor('red')" style="background-color: red;" />
-                <input class="btnColor" type="button" (click)="setSelectedColor('black')" style="background-color: black;" />
                 <input class="btnColor" type="button" (click)="setSelectedColor('yellow')" style="background-color:yellow ;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('lightGreen')" style="background-color: lightGreen;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('brown')" style="background-color: brown;" />
+                <input class="btnColor" type="button" (click)="setSelectedColor('lightBlue')" style="background-color:lightBlue ;" />
               </div>
             </div>
           </div>
@@ -46,7 +56,7 @@
           </div>
         </div>
         <div class="panel-default card">
-          <div class="panel-heading card-header card-header-dark-green" role="tab" id="headingThree">
+          <div class="panel-heading card-header card-header-purple" role="tab" id="headingThree">
             <h4 class="panel-title">
               <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false"
                 aria-controls="collapseThree">
@@ -113,7 +123,7 @@
             </div>
           </div>
         </div>
-        <input type="button" class="btn-race orange" (click)="saveGameData()" [tooltip]="'Click for START'" value='START' />
+        <input type="button" class="btn-race greenBtn" (click)="saveGameData()" [tooltip]="'Click for START'" value='START' />
       </div>
     </div>
     <div class="col-md-1">
@@ -122,14 +132,14 @@
       <h3 class="panel-title">Your Game</h3>
       <div class="panel-body" ng-transclude="">
         <div class="ng-scope">
-          <div class="alert card-header-purple">
+          <div class="alert card-header-red">
             <strong>color: </strong><label id="labelColor">{{tempData.carColor}}</label>
           </div>
           <div class="alert card-header-pink">
             <div><strong>from: </strong>{{tempData.route.source}}</div>
             <div><strong>to: </strong>{{tempData.route.destination}}</div>
           </div>
-          <div class="alert card-header-dark-green">
+          <div class="alert card-header-purple">
             <strong>Level: </strong>{{tempData.level}}
           </div>
           <div class="alert input-yellow">

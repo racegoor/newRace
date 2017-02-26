@@ -4,7 +4,7 @@ import { GameData, Point, markerLocation, markersLocation, gameData } from '../.
 
 @Component({
     selector: 'playersStatus',
-    styleUrls: ['playersStatus.css'],
+    styleUrls: ['playersStatus.scss'],
     templateUrl: 'playersStatus.html',
     encapsulation: ViewEncapsulation.None
 })
@@ -15,6 +15,7 @@ export class PlayersStatusComponent implements OnInit {
     distanceFromEndPoint: number = 0
     distance: string;
     winners: number = 0;
+    IsWinner = false;
 
 
     keys(): Array<string> {
@@ -37,18 +38,19 @@ export class PlayersStatusComponent implements OnInit {
         var d = R * c;
         this.distanceFromEndPoint = d;
         return this.distanceFormat();
-
     }
 
     distanceFormat() {
         let km = Math.floor(this.distanceFromEndPoint / 1000);
         let meters = Math.floor(this.distanceFromEndPoint % 1000);
-        if (km == 0 && meters == 0){
-            //this.winners = this.winners+1;
-            return 'Winner ' ;//+ this.winners ;            
+        if (km == 0 && meters == 0) {
+            return 'Winner ';
         }
-        return this.distance = (km > 0 ? km + ' KM, ' : '') +
-            (meters > 0 ? meters + (meters == 1 ? ' meter' : ' meters') : '')
+        else {
+            return this.distance = (km > 0 ? km + ' KM, ' : '') +
+                (meters > 0 ? meters + (meters == 1 ? ' meter' : ' meters') : '')
+        }
+
     }
 
     constructor() {

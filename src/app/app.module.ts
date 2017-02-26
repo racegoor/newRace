@@ -71,7 +71,7 @@ type StoreType = {
     HistoryModule,
     AboutRaceModule,
     RaceHomeModule,
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyA3MSv-mmUENEGYU4-0d37eWaASZji01zQ' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyA3MSv-mmUENEGYU4-0d37eWaASZji01zQ', libraries: ["places"] }),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GameAPI } from '../../utils/gamesApi';
-import { GameData, Point, Locations, marker, markerLocation, gameData } from '../../data/game_data';
+import { GameData, Point, Locations, marker, markerLocation, gameData,Route } from '../../data/game_data';
 import { AgmCoreModule, LatLngLiteral, LatLngBounds, SebmGoogleMap } from 'angular2-google-maps/core';
 
 class SavedGame {
@@ -19,9 +19,10 @@ class SavedGame {
 
 export class HistoryComponent implements OnInit {
     history: SavedGame[] = GameAPI.getAll();
-    pointMap:Point={lat:32.115633 , lng:34.84027600000002};
+    pointMap:Point = gameData.route.destPoint;
     locations:Point[];
-    colors:string[]=["#ffc200","#b70056","#d33c79","#3d9243","#ef5425"];
+    playerName: string = "";
+    colors:string[]=["#ff2430","#bb08c3","#7916d1","#fdde09","#32db16","#12930f"];
     constructor() {
 
     }
@@ -30,12 +31,13 @@ export class HistoryComponent implements OnInit {
         this.history = GameAPI.getAll();
     }
 
-    viewMap(point:Point , locationsPoints:Point[]) {
+    viewMap(point:Point , pLocationsPoints:Point[]  , pPlayerName:string) {
+        console.log("viewMap" , point);
         this.pointMap = point;
-        this.locations = locationsPoints;
-        $("#map").css("visibility", "visible");
+        console.log("pointMap"+this.pointMap.lat);
+        this.locations = pLocationsPoints;
+        this.playerName = pPlayerName;
     }
-
    
 }
 

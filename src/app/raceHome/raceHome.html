@@ -1,27 +1,37 @@
 <div class="row">
     <div class="col-md-3 col-sm-8 logo-conatiner">
-        <img class="race-logo" src="../../images/race-logo-new.png"/>
+        <!--<img class="race-logo" src="../../images/race-logo-new.png"/>-->
     </div>
     <div class="col-md-6 col-sm-0">
     </div>
     <div class="col-md-3 col-sm-10">
         <a [routerLink]=" ['../aboutRace'] ">
-            <input type="button" class="no-transform  btn-race orange" value='about' />
+            <input type="button" class="no-transform  btn-race yellowBtn" value='about' />
         </a>
     </div>
     <div class="col-md-3 col-sm-10">
         <a [routerLink]=" ['../history'] ">
-            <input type="button" class="no-transform btn-race orange" value='History' />
+            <input type="button" class="no-transform btn-race greenBtn" value='History' />
         </a>
     </div>
 </div>
 <div class="row">
     <img class="bgImage col-md-12 col-sm-12" src="../../images/race-home.png" />
 </div>
+<img class="texthome" src="../../images/text-home.png" />
+
+<div class="form-group statistic text-race">
+
+    <div class="statisticItem">* 38 players now online visits</div>
+    <div class="statisticItem">* 208 players Cerise site today</div>
+    <div class="statisticItem">* 12,348 Cerise site</div>
+    <div class="statisticItem">* Jerusalem is the popolar city - 2,970 games!</div>
+</div>
+
 <div class="row col-md-12 btnContainer">
     <div class="col-md-3 col-sm-10">
         <a [routerLink]=" ['../createGame'] ">
-            <input type="button" class="no-transform btn-race orange btn-start-game" value='play now!!!' />
+            <input type="button" class="no-transform btn-race redBtn btn-start-game" value='play now!!!' />
         </a>
     </div>
 </div>

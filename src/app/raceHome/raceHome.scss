@@ -30,7 +30,7 @@
 
 .btn-start-game{
     font-size:30px;
-    bottom: 85px;
+    bottom: 50px;
 }
 
 @media (max-width: 400px) {
@@ -51,5 +51,22 @@
 fieldset{
     margin-bottom: 30px;
     background-color: lightblue;
+}
+.texthome{
+    margin-left: 12%;
+    width: 85%;
+    bottom: 60%;
+    position: absolute;
+}
+.statistic{
+    bottom: 30%;
+    position: absolute;
+    width: 22%;
+    background-color: #12222f;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+}
+.statisticItem{
+    font-family: cursive;
+    line-height: 150%;
 }
 

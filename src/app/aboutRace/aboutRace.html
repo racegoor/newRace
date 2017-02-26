@@ -1,222 +1,26 @@
 <div class="aboutRace">
     <div class="row">
-        <div class="col-md-1">           
+        <div class="col-md-1">
         </div>
-        <div class="col-md-10 alert back-purple text-race">
-            <strong>Race</strong>
-            <p>The race is the most exciting game developed by Zippy Zippy and graduation project engineering software. The
-                idea came after Tzipi game wanted to develop a Google Maps app and expectations prefer to play. The two tried
-                to reach an agreement which ultimately produced this creative game. Game on Google's panorama is exciting
-                and challenging. You can drive you familiar streets, home or school friends and even reach distant places
-                and unfamiliar. The last time you visited Big Ben in London or stroll the streets of Paris? Here you will
-                feel that you are in the location chosen and get to know him better when residents.
-            </p>
-            <p>
-                המרוץ הוא משחק מלהיב ביותר שפותח על ידי ציפי וציפי במסגרת פרויקט סיום לימודי הנדסאות תוכנה. הרעיון למשחק עלה לאחר שציפי א
-                רצתה לפתח אפליקציה במפות גוגל ואילו ציפי ב העדיפה ליצור משחק. השתיים ניסו להגיע להסדר שהניב בסופו את המשחק
-                היצירתי הזה. המשחק על הפנורמה של גוגל הוא מלהיב ומאתגר. תוכלו לנסוע ברחובות המוכרים לכם, מהבית לחברים או
-                לבית הספר ואולי גם לנסות להגיע להגיע למקומות רחוקים ובלתי מוכרים. מתי בפעם האחרונה ביקרת בביג בן שבלונדון
-                או טיילת ברחובות פריז? כאן תוכל לחוש שאתה נמצא במקום שבחרת ולהכיר אותו טוב יותר מהתושבים שבו.</p>
+        <div class="col-md-10 alert back-green text-race">
+            <h2>
+                <h1>Race</h1> - the game that takes you as far as possible!!!</h2>
+            <div></div>
+            <p class="aboutText">Race is a very exciting game developed by Zipi & Zipi as part of final project of computer programing. the idea
+                of the game came after Zipi A wanted to develop an application with Google Maps while Zipi B prefered to
+                develop a game. The two friends tried to reach an agreement which ultimately produced this creative game.
+                Game on Google's panorama is exciting and challenging. You can drive on familiar streets, from your home
+                to friends or to school, and maybe even try to reach faraway foreign places. When was the last time you visited
+                the Big Ben in London or toured the streets of Paris? Here you will be able to feel as if you are in the
+                place you chose and you will get to know it better then its residents! </p>
         </div>
         <div class="col-md-1">
-            <a [routerLink]=" ['../raceHome'] ">
-                <input type="button" class="btn btn-primary" value='Back' />
-            </a>
         </div>
     </div>
 </div>
-<!--<div class="chat">
-    <div class="container">
-        <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
-            <div class="col-xs-12 col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading top-bar" (click)="func1()">
-                        <div class="col-md-8 col-xs-8">
-                            <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Can you help me?</h3>
-                        </div>
-                        <div class="col-md-4 col-xs-4" style="text-align: right;">
-                            <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim " (click)="func1()"></span></a>
-                            <a href="#"><span class="glyphicon glyphicon-remove icon_close" (click)="func4()" data-id="chat_window_1"></span></a>
-                        </div>
-                    </div>
-                    <div class="panel-body msg_container_base">
-                        <div class="row msg_container base_sent">
-                            <div class="col-md-10 col-xs-10">
-                                <div class="messages msg_sent">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                        </div>
-                        <div class="row msg_container base_receive">
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                            <div class="col-md-10 col-xs-10">
-                                <div class="messages msg_receive">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row msg_container base_receive">
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                            <div class="col-xs-10 col-md-10">
-                                <div class="messages msg_receive">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row msg_container base_sent">
-                            <div class="col-xs-10 col-md-10">
-                                <div class="messages msg_sent">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                        </div>
-                        <div class="row msg_container base_receive">
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                            <div class="col-xs-10 col-md-10">
-                                <div class="messages msg_receive">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row msg_container base_sent">
-                            <div class="col-md-10 col-xs-10 ">
-                                <div class="messages msg_sent">
-                                    <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                    <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer" (click)="func2()">
-                        <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm chat_input" (click)="func2()" placeholder="Write your message here..."
-                            />
-                            <span class="input-group-btn">
-                        <button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-
+<img class="car3" src="../../images/car3.png" />
 
 <div class="row">
     <div class="col-md-3">
-
-        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="card-block">
-                <div class="panel-body msg_container_base">
-                    <div class="row msg_container base_sent">
-                        <div class="col-md-10 col-xs-10">
-                            <div class="messages msg_sent">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                    </div>
-                    <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                        <div class="col-md-10 col-xs-10">
-                            <div class="messages msg_receive">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                        <div class="col-xs-10 col-md-10">
-                            <div class="messages msg_receive">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row msg_container base_sent">
-                        <div class="col-xs-10 col-md-10">
-                            <div class="messages msg_sent">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                    </div>
-                    <div class="row msg_container base_receive">
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                        <div class="col-xs-10 col-md-10">
-                            <div class="messages msg_receive">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row msg_container base_sent">
-                        <div class="col-md-10 col-xs-10 ">
-                            <div class="messages msg_sent">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
-                                <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-xs-2 avatar">
-                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-footer" (click)="func2()">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm chat_input" (click)="func2()" placeholder="Write your message here..."
-                        />
-                        <span class="input-group-btn">
-                        <button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-header top-bar" role="tab" id="headingTwo">
-            <h5 class="mb-0">
-                <a class="collapsed text-race" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
-                    aria-controls="collapseTwo">
-                Can you help me?
-                </a>
-            </h5>
-        </div>
-
     </div>
 </div>

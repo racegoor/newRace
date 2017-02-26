@@ -59,7 +59,7 @@ $hoverlink: $primary-dark;
 @mixin body-bg() {
   background-color: $body-bg;
 
-  $mainBgUrl: "../../images/bg-home.jpg";
+  /*$mainBgUrl: "../../images/bg-home.jpg"; by zw*/
 
   &::before {
     content: '';
@@ -68,8 +68,8 @@ $hoverlink: $primary-dark;
     height: 100%;
     top: 0;
     left: 0;
-    background: url($mainBgUrl) no-repeat center center;
-    /*background-color: #79d279;*/
+    /*background: url($mainBgUrl) no-repeat center center; by zw*/
+    background-color: #12222f;
     background-size: cover;
     will-change: transform;
     z-index: 0;

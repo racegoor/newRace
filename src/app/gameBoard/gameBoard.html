@@ -2,45 +2,46 @@
     <input type="button" class="btn btn-primary" value='Back' />
   </a>-->
 <div class="row">
-  <div id="bigMap" class="col-md-6">
-    <div class="gameDiv" id="map-panorama">
-      <game [gameData]="gameData" (onchangeKM)="distanceFormat($event)" (onSuccess)="isSuccess($event)"></game>
-     
+    <div id="bigMap" class="col-md-6">
+        <div class="gameDiv" id="map-panorama">
+            <game [gameData]="gameData" (onchangeKM)="distanceFormat($event)" (onSuccess)="isSuccess($event)"></game>
+
+        </div>
+        <div id="element"></div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <input type="button" value="<>" (click)="replaceMaps()" />
-    <div class="row">
-      <div class="col-md-9 col-xs-9 gameDiv details">
-        <gameDetails [gameData]="gameData" [test]='test' [currentAddress]="currentAddress" [distance1]="distance" [success]="success"></gameDetails>
-      </div>
-      <div class="col-md-3 col-xs-3">
-        <playersStatus [allMarkersLocation]="playersLocation" [gameData]="gameData"></playersStatus>
-      </div>
+    <div class="col-md-6 addrow">
+        <input type="button" value="<>" (click)="replaceMaps()" data-toggle="modal" data-target="#myModal" />
+        <div class="row 3coulmn">
+            <div class="col-md-9 col-xs-9 gameDiv details">
+                <gameDetails [gameData]="gameData" [test]='test' [currentAddress]="currentAddress" [distance1]="distance" [success]="success"></gameDetails>
+            </div>
+            <div class="col-md-3 col-xs-3">
+                <playersStatus [allMarkersLocation]="playersLocation" [gameData]="gameData"></playersStatus>
+            </div>
+        </div>
+        <div id="smallMap" class="row 9coulmn">
+            <div id="map-normal" class="col-md-9">
+                <gameMap id="gameMapChild" class="map-padding" [gameData]="gameData" (onChangeMarkersLocation)="changeMarkersLocation($event)" [currentPoint]="currentPoint"
+                    [locations]="locations">
+                </gameMap>
+            </div>
+            <div class="col-md-3">
+                <!--<img class="car2" src="../../images/car2.png" />-->
+            </div>
+        </div>
     </div>
-    <div id="smallMap" class="row">
-      <div id="map-normal" class="col-md-9">
-        <gameMap class="map-padding" [gameData]="gameData" (onChangeMarkersLocation)="changeMarkersLocation($event)" [currentPoint]="currentPoint"
-          [locations]="locations">
-        </gameMap>
-      </div>
-      <div class="col-md-3">
-        <img class="car2" src="../../images/car2.png" />
-      </div>
-    </div>
-  </div>
 </div>
- <!--chat-->
-  <div class="row">
+<!--chat-->
+<div class="row">
     <div class="col-md-3 helpChat">
 
         <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="card-block">
+            <div class="card-block card-chat">
                 <div class="panel-body msg_container_base">
                     <div class="row msg_container base_sent">
                         <div class="col-md-10 col-xs-10">
                             <div class="messages msg_sent">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
+                                <p>someone know how can I exit from Hazanchanim street???</p>
                                 <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
                             </div>
                         </div>
@@ -54,7 +55,7 @@
                         </div>
                         <div class="col-md-10 col-xs-10">
                             <div class="messages msg_receive">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
+                                <p>you need turn right at the crossroads</p>
                                 <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                         </div>
                         <div class="col-xs-10 col-md-10">
                             <div class="messages msg_receive">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
+                                <p>thank</p>
                                 <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
                             </div>
                         </div>
@@ -73,7 +74,7 @@
                     <div class="row msg_container base_sent">
                         <div class="col-xs-10 col-md-10">
                             <div class="messages msg_sent">
-                                <p>that mongodb thing looks good, huh? tiny master db, and huge document store</p>
+                                <p>there is accros this street?</p>
                                 <time datetime="2009-11-13T20:00">Timothy • 51 min</time>
                             </div>
                         </div>
@@ -127,8 +128,32 @@
         </div>
 
     </div>
-  </div>
+</div>
 <!--endchat-->
-<div class="winImg">
-  <img class="imgSize" src="../../images/5star.jpg" />
+<!--<div class="winImg">
+  <img class="imgSize" src="../../images/winner2.png" />
+</div>-->
+<div class="row">
+    <div class="col-md-7">
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img id="winnerImg" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-race" data-dismiss="modal">Continue to travel</button>
+                            <a [routerLink]=" ['../raceHome'] ">
+                                <button type="button" class="btn btn-race" data-dismiss="modal">End Game</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

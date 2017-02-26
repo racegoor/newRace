@@ -3,7 +3,24 @@
     height: 300px; 
     visibility: hidden; 
 }
+#hmap{
+    width: 300px;
+    height: 300px; 
+}
 .history{
     position: absolute;
     width: 100%;
 }
+.modal-title{
+    color: green;
+}
+@media (min-width: 544px){
+    .modal-dialog {
+        max-width: 330px !important;
+    }
+}
+tr{
+    border-bottom: 6px solid;
+    border-color: #12222f;
+}
+

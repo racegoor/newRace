@@ -35,7 +35,7 @@ export class CreateGameComponent implements OnInit {
       source: 'הדף היומי 6 תל אביב',
       destination: 'הצנחנים 22 תל אביב',
       destPoint: { lat: 32.1167004, lng: 34.84040849999997 },
-    sourcePoint: { lat: 32.115633, lng: 34.84027600000002 }
+      sourcePoint: { lat: 32.115633, lng: 34.84027600000002 }
     };
   }
 
@@ -52,7 +52,7 @@ export class CreateGameComponent implements OnInit {
   }
 
   setSelectedLevel(selectedLevel: number) {
-    console.log("setSelectedLevel" , selectedLevel);
+    console.log("setSelectedLevel", selectedLevel);
     this.tempData.level = selectedLevel;
   }
 
@@ -75,13 +75,25 @@ export class CreateGameComponent implements OnInit {
   }
 
   validateRoute() {
-    this.gameData.setData(this.tempData);    
+    this.gameData.setData(this.tempData);
     console.log("validation success");
     window.location.href = "http://localhost:4000/#/gameBoard";
   }
 
+  showImage() {
+    console.log("showImage");
+    let src = document.getElementById("file-input");
+    let target = document.getElementById("target");
+    var fr = new FileReader();
+    fr.onload = function (e) { target.src = this.result; };
+    src.addEventListener("change", function () {
+      fr.readAsDataURL(src.files[0]);
+    });
+  }
+
+
   GetRoute(callback) {
-    let directionsService = new google.maps.DirectionsService();
+   /* let directionsService = new google.maps.DirectionsService();
     let start = new google.maps.LatLng(this.gameData.route.sourcePoint.lat, this.gameData.route.sourcePoint.lng);
     let end = new google.maps.LatLng(this.gameData.route.destPoint.lat, this.gameData.route.destPoint.lng);
     let request = {
@@ -91,12 +103,13 @@ export class CreateGameComponent implements OnInit {
       travelMode: google.maps.TravelMode['DRIVING'],
     };
     directionsService.route(request, (response, status) => {
-      if (status == google.maps.DirectionsStatus.OK && response.routes[0].overview_path.length>0) {
+      if (status == google.maps.DirectionsStatus.OK && response.routes[0].overview_path.length > 0) {
         callback()
       }
       else
         alert("google not find route between this places");
-    });
+    });*/
+    callback();
   }
 
   getPointByAddress(address: string, varName: string, callback: any) {
@@ -109,16 +122,16 @@ export class CreateGameComponent implements OnInit {
           lat: response.lat(),
           lng: response.lng()
         }
-        if (varName =="tempData.route.sourcePoint")
-        this.tempData.route.sourcePoint = {
-          lat: response.lat(),
-          lng: response.lng()
-        }
-        if (varName =="tempData.route.destPoint")
-        this.tempData.route.destPoint = {
-          lat: response.lat(),
-          lng: response.lng()
-        }
+        if (varName == "tempData.route.sourcePoint")
+          this.tempData.route.sourcePoint = {
+            lat: response.lat(),
+            lng: response.lng()
+          }
+        if (varName == "tempData.route.destPoint")
+          this.tempData.route.destPoint = {
+            lat: response.lat(),
+            lng: response.lng()
+          }
         myCallback();
       }
       else {

@@ -40,7 +40,7 @@ export class GameData {
         this.carColor = 'red';
         this.route = new Route();
         this.level = 2;
-        this.numPlayers = 3;
+        this.numPlayers = 5;
         this.player = '';
         this.destinationPoint = { lat: 32.1167004, lng: 34.84040849999997 }
         this.sourcePoint = { lat: 32.115633, lng: 34.84027600000002 };
@@ -55,7 +55,7 @@ export class GameData {
             sourcePoint: { lat: 32.115633, lng: 34.84027600000002 }
         };
         this.level = gameData.level ? gameData.level : 1;
-        this.numPlayers = gameData.numPlayers ? gameData.numPlayers : 3;
+        this.numPlayers = gameData.numPlayers ? gameData.numPlayers : 5;
         this.player = gameData.player ? gameData.player : 'unknown';
         this.destinationPoint = gameData.destinationPoint ? gameData.destinationPoint : null;
         this.sourcePoint = gameData.sourcePoint ? gameData.sourcePoint : null;
@@ -81,6 +81,7 @@ export class SavedGame {
     date: string;
     dateStart: string;
     dateEnd: string;
+    //winLevel: number;
     time: string;
     playerName: string;
     routePoints: Point[];

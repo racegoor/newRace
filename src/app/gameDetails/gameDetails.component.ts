@@ -5,7 +5,7 @@ import moment = require("moment");
 
 @Component({
     selector: 'gameDetails',
-    styleUrls: ['gameDetails.css'],
+    styleUrls: ['gameDetails.scss'],
     templateUrl: 'gameDetails.html',
     encapsulation: ViewEncapsulation.None
 })

@@ -1,6 +1,8 @@
 <div class="bg">
-    <div class="text" *ngFor="let key of keys();">
-        <img src={{allMarkersLocation[key].marker}}/>
-        <b>{{distanceFromDestination(allMarkersLocation[key].currentLocation)}}</b>       
-    </div>
+    <table>
+    <tr class="textStatus" *ngFor="let key of keys();">
+        <td><img class="marker" src={{allMarkersLocation[key].marker}}/></td>
+        <td><b>{{distanceFromDestination(allMarkersLocation[key].currentLocation)}}</b></td>      
+    </tr>
+    </table>
 </div>

@@ -10,7 +10,9 @@
         <p>More info!</p>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
+    <sebm-google-map-marker  [latitude]="gameData.route.destPoint.lat" [longitude]="gameData.route.destPoint.lng"
+      [iconUrl]="flag">
+    </sebm-google-map-marker>
   </sebm-google-map>
-  
   <input type="button" class='btn btn-primary' value="add players" (click)="addPlayersToMap()" />
 </div>

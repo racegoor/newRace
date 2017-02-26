@@ -1,14 +1,17 @@
+/*///<reference path="../../../../typings/modules/XMLWriter/index.d.ts" />*/
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, Input } from '@angular/core';
 import { AgmCoreModule, LatLngLiteral } from 'angular2-google-maps/core';
 import { GameData, Point } from '../../data/game_data';
 import { MapsAPILoader } from 'angular2-google-maps/core/services/maps-api-loader/maps-api-loader';
 import { GameAPI } from '../../utils/gamesApi';
 import moment = require("moment");
-
+//op2 - import * as XmlObjects from "";
+import { xml } from "../../../node_modules/ckeditor/plugins";
+//op1 - import * as x2js  from 'xml2json';
 
 @Component({
     selector: 'game',
-    styleUrls: ['game.css'],
+    styleUrls: ['game.scss'],
     templateUrl: 'game.html',
     encapsulation: ViewEncapsulation.None
 })
@@ -32,11 +35,27 @@ export class GameComponent implements OnInit {
     constructor(private _loader: MapsAPILoader) {
     }
 
+    /*op1 - myjson() {
+        var req = this.http.get("../../../../xmlFile.xml");
+        return req.map((res: Response) => {
+            let c = res.text();
+            console.log("json", c);
+            let myJson = x2js.xml_str2json(c);
+            console.log("json", myJson);
+            return myJson;
+        });
+    }*/
+
     ngOnInit() {
+        var parser = new DOMParser();
+        /*op2 - let doc = XmlObjects.parse("../../../../xmlFile.xml");
+        let rootElement = doc.root;
+        let allNodes = rootElement.nodes();
+        console.log("xml - - - rootElement " + rootElement);
+        console.log("xml - - - allNodes " + allNodes);*/
         return this._loader.load().then(() => {
             this.getViewStreetPanorama();
             this.dateStart = moment().format('DD/MM/YYYY - HH:mm:ss');
-            console.log('this.dateSta', this.dateStart)
             return;
         });
     }
@@ -106,6 +125,7 @@ export class GameComponent implements OnInit {
         this.checkIfSuccess();
     }
 
+//TODO - thred - setInterval is thred??? 
     getTip() {
         setInterval(() => {
             let directionsService = new google.maps.DirectionsService();
@@ -120,17 +140,19 @@ export class GameComponent implements OnInit {
             directionsService.route(request, (response, status) => {
                 let tip;
                 if (status == google.maps.DirectionsStatus.OK) {
-                    if (response.routes[0].legs[0].steps[0] && response.routes[0].legs[0].steps[1]) {
-                        tip = response.routes[0].legs[0].steps[0].instructions + "</br>" +
-                            response.routes[0].legs[0].steps[1].instructions;
+                    let str = response.routes[0].legs[0];
+                    if (str.steps[0] && str.steps[1]) {
+                        tip = str.steps[0].instructions.replace("התחל", "פנה") + "</br>" +
+                            str.steps[1].instructions;
+                        document.getElementById("alertTip").innerHTML = tip;
+                        //$("#alertTip").removeClass("fade").addClass("show");
                     }
                     else
                         tip = "<div></div>";
                     console.log(tip);
-                    document.getElementById("p1").innerHTML = tip;
                 }
             });
-        }, 30000)
+        }, 20000)
     }
 
     getPointByAddress(address: string, varName: string, callback: any) {
@@ -157,7 +179,6 @@ export class GameComponent implements OnInit {
         this.getViewStreetPanorama();
     }
 
-
     checkIfSuccess() {
         if (!this.success) {
             if (this.point.lat.toFixed(3) == this.gameData.route.destPoint.lat.toFixed(3)
@@ -170,6 +191,7 @@ export class GameComponent implements OnInit {
                     playerName: this.gameData.player,
                     dateStart: this.dateStart,
                     dateEnd: moment().format("DD/MM/YYYY HH:mm:ss"),
+                   // winLevel: 3,
                     route: this.gameData.route,
                     numPlayers: this.gameData.numPlayers,
                     routePoints: this.locations
